@@ -1,0 +1,8 @@
+.product {
+  position: absolute;
+  width: 100%;
+  background: tomato;
+  min-height: 70vh;
+  top: 100px;
+  justify-content: center;
+}

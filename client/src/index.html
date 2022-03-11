@@ -1,12 +1,97 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- css style -->
+    <link rel="stylesheet" href="./css/config.css" />
+    <link rel="stylesheet" href="./css/homeView.css" />
+    <link rel="stylesheet" href="./css/productView.css" />
+
+    <link rel="stylesheet" href="./css/sliderTop.css" />
+    <link rel="stylesheet" href="./css/variables.css" />
+    <!-- font-face -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- icons -->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+
+    <!-- javascript -->
+    <script src="./js/renderView.js" type="module"></script>
+    <script src="./js/animations.js" type="module"></script>
     <title>Forever Belle Shop</title>
-</head>
-<body>
-    <h1>Forever Belle</h1>
-</body>
+  </head>
+  <body>
+    <section>
+      <header>
+        <!---------- HEADER NAV  ---------->
+        <nav class="nav">
+          <!-- carousel nav -->
+          <section class="nav__carousel">
+            <div class="slider">
+              <div class="slide-track">
+                <div class="slide">
+                  <small>Promoções diários</small>
+                </div>
+                <div class="slide">
+                  <small>Novidades toda semana</small>
+                </div>
+                <div class="slide">
+                  <small>Frete grátis</small>
+                </div>
+                <div class="slide">
+                  <small>Entregamos em todas as regiões</small>
+                </div>
+                <div class="slide">
+                  <small>Top marcas do mercado</small>
+                </div>
+                <div class="slide">
+                  <small>Tecido de alta qualidade</small>
+                </div>
+                <div class="slide">
+                  <small>Cadastre-se agora!</small>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Menus -->
+          <section class="nav__container d-flex sp-between al-center pr-pl">
+            <div class="nav__logo" title="Home | Forever Belle">
+              <h1>
+                <a href="/">Forever Belle</a>
+              </h1>
+            </div>
+
+            <div class="nav__menu">
+              <ul class="d-flex sp-between al-center">
+                <li class="d-flex al-center">
+                  <a href="/#/">Log in</a>
+                  <span class="material-icons">person</span>
+                </li>
+                <li class="d-flex al-center">
+                  <a href="/#/">Carrinho</a>
+                  <span class="material-icons">shopping_bag</span>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </nav>
+      </header>
+
+      <!---------- MAIN  ---------->
+      <main class="main" id="main-container"></main>
+
+      <!-- Footer section -->
+      <footer></footer>
+    </section>
+  </body>
 </html>
