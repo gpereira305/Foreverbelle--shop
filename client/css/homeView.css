@@ -165,7 +165,7 @@
   margin-bottom: 8px;
 }
 
-.sales__grid--price span:first-child {
+.sales__grid--old-price {
   color: var(--gray-color);
   text-decoration: line-through;
   margin-right: 10px;
