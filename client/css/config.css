@@ -9,7 +9,8 @@
   --light-pink: #f2ece7;
   --gray-color: #707070;
   --white-color: #ffffff;
-  --red-color: #e62c2c;
+  --green-color: #0abd62;
+  --red-color: #ed1212;
   --light_gray-color: #eff1f2;
 
   --transition: all 0.4s ease;
@@ -66,7 +67,7 @@ html {
 
 body {
   width: 100%;
-  min-height: 100vh;
+  /* min-height: 100vh; */
   background-color: var(--body-color);
   font-size: 1.6rem;
 }
@@ -90,12 +91,22 @@ body {
   padding: 12px 20px;
 }
 
+.main-btn:hover {
+  opacity: 0.85;
+}
+
 .outline {
   border-color: var(--white-color);
   background: transparent;
 }
 
+.filled a,
 .outline a {
+  color: var(--white-color);
+}
+
+.filled {
+  background-color: var(--black-color);
   color: var(--white-color);
 }
 
@@ -134,4 +145,5 @@ body {
 
 .upper {
   text-transform: uppercase;
+  text-align: center;
 }

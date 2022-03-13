@@ -2,7 +2,7 @@ import HomeView from "./views/HomeView.js";
 import ProductView from "./views/ProductView.js";
 import NotFoundView from "./views/NotFoundView.js";
 
-import { parseRequestUrl } from "./utils/index.js";
+import { parseRequestUrl } from "./utils";
 
 // ROUTE PATHS
 const routes = {
@@ -22,6 +22,7 @@ const router = async () => {
 
   const main = document.getElementById("main-container");
   main.innerHTML = await screen.render();
+  await screen.after_render();
 
   //  NAVBAR ANIMATION
   const nav = document.querySelector(".nav__container");
@@ -40,7 +41,6 @@ const router = async () => {
       lastScrollY = sy;
     }
   }
-
   let didScroll = false;
   window.addEventListener("scroll", function (e) {
     didScroll = true;
@@ -53,68 +53,17 @@ const router = async () => {
     }
   }, 250);
 
-  //  USER COMMENTS CAROUSEL
-  const carousel = () => {
-    const slides = document.querySelector(".customers__slides");
-    const nextSlide = document.querySelector(".next-slide");
-    const prevSlide = document.querySelector(".prev-slide");
-
-    const slidesCount = slides.childElementCount;
-    const maxLeft = (slidesCount - 1) * 100 * -1;
-    const delay = 4000;
-    let current = 0;
-
-    const changeSlide = (next = true) => {
-      next
-        ? (current += current > maxLeft ? -100 : current * -1)
-        : (current = current < 0 ? current + 100 : maxLeft);
-
-      slides.style.left = current + "%";
-    };
-
-    let autoChange = setInterval(changeSlide, delay);
-    const restart = () => {
-      clearInterval(autoChange);
-      autoChange = setInterval(changeSlide, delay);
-    };
-
-    // Controls
-    nextSlide.addEventListener("click", () => {
-      changeSlide();
-      restart();
-    });
-    prevSlide.addEventListener("click", () => {
-      changeSlide(false);
-      restart();
-    });
-  };
-
-  // PRODUCT MODAL
-  const looks = document.querySelectorAll(".look");
-  const getIds = document.querySelectorAll(".addToCart");
-
-  const modal = document.querySelector("#modal");
-  const removeModal = document.querySelector(".remove-modal");
-  const body = document.querySelector("body");
-
-  getIds.forEach((getId) => {
-    getId.addEventListener("click", () => {
-      console.log(getId.id);
+  //  GO TO THE TOP OF THE PAGE
+  const iconBtns = document.querySelectorAll(".icon__btn");
+  iconBtns.forEach((iconBtn) => {
+    iconBtn.addEventListener("click", () => {
+      window.scrollTo(0, 0);
     });
   });
 
-  looks.forEach((look) => {
-    look.addEventListener("click", () => {
-      console.log(look.image);
-      modal.style.display = "flex";
-      body.style.overflow = "hidden";
-    });
-  });
-
-  removeModal.onclick = (e) => {
-    modal.style.display = "none";
-    body.style.overflow = "initial";
-  };
+  //  GET CURRENT YEAR
+  const currentDate = new Date().getFullYear();
+  document.getElementById("copy").innerText = currentDate;
 };
 
 window.addEventListener("load", router);

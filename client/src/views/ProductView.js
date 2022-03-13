@@ -1,10 +1,123 @@
+import { parseRequestUrl } from "../utils";
+import { getProduct } from "../api";
+import Rating from "../components/Rating";
+
 const ProductView = {
-  render: () => {
-    return `
-            <section class="product d-flex al-center pr-pl">
-                <h1>Product View</h1>
-            </section>
-        `;
+  after_render: () => {
+    const request = parseRequestUrl();
+    const addBtn = document.getElementById("add-button");
+    addBtn.addEventListener("click", () => {
+      document.location.hash = `/cart/${request.id}`;
+    });
+  },
+
+  render: async () => {
+    const request = parseRequestUrl();
+    const product = await getProduct(request.id);
+    if (product.error) {
+      return ` 
+         <section class="product d-flex al-center pr-pl">
+            <h1>${product.error}</h1>
+          </section>
+      `;
+    } else {
+      return `
+          <section class="product d-flex al-center pr-pl">
+              <div class="product__back d-flex">
+                 <span class="material-icons">
+                   chevron_left
+                 </span>
+                 <a href="/#/" title="Voltar à home">Voltar</a>
+              </div>  
+
+            <div class="product__detail d-flex"> 
+              <div class="product__detail--image">
+                  <img src="${product.image}" alt="${product.name}" />
+              </div>
+
+                <div class="product__detail--info">
+                  <h1>${product.name}</h1>   
+                  ${Rating.render({ value: product.rating })}
+
+                    <div class="product__detail--stock">
+                      ${
+                        product.countStock > 0
+                          ? `<span class="success">Em estoque</span>`
+                          : `<span class="error">Esgotado</span>`
+                      } 
+                      <br />
+
+                        <div class="product__detail--price d-flex">
+                          <div class="d-flex">
+                                ${
+                                  product.price < 62
+                                    ? `
+                                <h3 class="old-price">R$ ${
+                                  product.price
+                                },99</h3>
+
+                                <h3>R$ ${(
+                                  product.price -
+                                  (product.price - (72 / 100) * product.price)
+                                ).toFixed(0)},99 <span>À vista</span>
+                                </h3> 
+                                `
+                                    : `<span>R$ ${product.price},99</span>`
+                                }
+                          </div>
+                          <h4>ou 6x sem juros</h4>
+                        </div>
+
+                    </div> 
+                      <br>
+                    
+                    <div class="product__detail--button"> 
+                      ${
+                        product.countStock > 1
+                          ? `
+                          <button type="button" class="main-btn filled" id="add-button"  title="Adicionar ao carrinho">Adicionar ao carrinho</button> 
+                          `
+                          : ` 
+                          <button type="button" class="main-btn filled disabled" title="Esgotado">Adicionar ao carrinho</button>
+                        `
+                      } 
+                    </div>
+                    <br>
+
+                    <div class="product__description">
+                      <h3>Descrição:</h3>
+                      <small>${product.description}</small> 
+
+                      <h5>Tags:<span> ${product.tag}</span></h5>
+
+                      <br>
+                      <br>
+                      <div class="product__description-media">
+                        <h4>Siga nos:</h4>
+                          <div class="product__description-icons d-flex al-center sp-between">
+                          <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">
+                            <img src="../../assets/icons/facebook.svg" alt="Facebook" title="Facebook"/>
+                          </a>
+
+                          <a href="https://twitter.com/?lang=en" target="_blank" rel="noopener noreferrer">
+                            <img src="../../assets/icons/twitter.svg" alt="Twitter" title="Twitter"/>
+                          </a>
+
+                          <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
+                            <img src="../../assets/icons/instagram.svg" alt="Instagram" title="Instagram"/>
+                          </a>
+
+                          <a href="https://pinterest.com/" target="_blank" rel="noopener noreferrer">
+                            <img src="../../assets/icons/pinterest.svg" alt="Pinterest" title="Pinterest"/>
+                          </a> 
+                          </div>
+                      </div>
+                    </div>
+                </div>  
+            </div> 
+       </section> 
+      `;
+    }
   },
 };
 export default ProductView;

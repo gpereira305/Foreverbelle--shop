@@ -1,6 +1,11 @@
-import customerComments from "../data/index.js";
+import customerComments from "../data";
+import { parseRequestUrl } from "../utils";
+import { getProduct } from "../api";
+
+import Rating from "../components/Rating.js";
 import axios from "axios";
 
+//
 const HomeView = {
   render: async () => {
     const resource = await axios({
@@ -20,11 +25,10 @@ const HomeView = {
 
     return ` 
     <!--++++++++ Nav banner ++++++++-->
-    <div class="nav__banner" id="nav-banner">
-       <img src="./assets/img/banner-img.jpg" alt="" />
+    <div class="nav__banner" id="nav-banner"> 
         <div class="nav__banner-text">
            <h1>Clothes to fit every one</h1>
-           <button type="button" class="main-btn outline">
+           <button type="button" class="main-btn outline" >
              <a href="/#sales">Conferir ofertas</a>
            </button>
         </div>
@@ -33,7 +37,8 @@ const HomeView = {
       <!--++++++++ Sales grid ++++++++-->
        <section class="sales mt-mb pr-pl" id="sales">
          <div class="sales__title d-flex jc-center al-center m-height">
-           <h1 class="upper">Nossas ofertas</h1>
+         <h1 class="upper">Nossas ofertas</h1> 
+
           </div>
             <div class="sales__grid"> 
                ${products
@@ -42,86 +47,41 @@ const HomeView = {
                    (product) => `
                     <div class="sales__grid--card">
                         <span>Em promoção</span>
-                          <a href="/#/product/${product._id}">
-                            <img src="${product.image}" alt="${product.name}" />
-                          </a>
-                        <div class="sales__grid--actions">
-                        <span
-                            class="material-icons jc-center al-center"
-                            title="Favoritar"
-                            >favorite</span
-                        >
-                        <span 
-                            class="material-icons jc-center al-center addToCart"
-                            title="Adicionar ao corrinho"
-                            >shopping_bag</span
-                        >
-                        <span class="material-icons jc-center al-center look" title="Espiar"
-                            >remove_red_eye</span
-                        >
-                        </div>
-                        <div class="sales__grid--info">
-                        <h5>${product.brand}</h5>
-                        <div class="sales__grid--price">
-                            <span class="sales__grid--old-price">R$ ${
-                              product.price
-                            },99</span> 
-                            <span>R$ ${(
-                              product.price -
-                              (product.price - (72 / 100) * product.price)
-                            ).toFixed(0)},99</span>  
-                        </div>
-                        <div class="sales__grid--rating" title="Avaliações de clientes">
-                            <span class="material-icons">star</span>
-                            <span class="material-icons">star</span>
-                            <span class="material-icons">star</span>
-                            <span class="material-icons">star</span>
-                            <span class="material-icons">star_outline</span>
-                        </div>
-                        </div>    
-                    </div>
+                        <img src="${product.image}" alt="${product.name}" />
 
-                    <!--++++++++ Product modal ++++++++-->
-                    <div class="modal" id="modal"> 
-                      <div class="modal__product">
-                        <span 
-                           class="remove-modal material-icons" 
-                           title="Fechar modal"
-                           >
-                           close
-                        </span> 
-                         
-                          <div class="modal__product-container"> 
-                             <div class="modal__product-image">
-                                <img src="${product.image}" alt="" />
-                             </div>
-    
-                             <div class="modal__product-info">
-                                 <h2>${product.brand}</h2>
-                                 <span>R$ 59.99</span> 
-    
-                                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry
-                                 </p> 
-    
-                                 <div class="modal__product-add">
-                                     <span>1 + - </span>
-                                     <button type="button">Add to cart</button>
-                                 </div> 
-    
-                                 <div class="modal__product-categories">
-                                     <h3>Categorias:</h3>
-                                     <p>Roupa feminina</p>
-                                     <br>
-    
-                                     <span>facebook</span>
-                                     <span>twitter</span>
-                                     <span>instagram</span>
-                                     <span>pinterest</span>
-                                 </div>
-                             </div>
+                        <div class="sales__grid--actions">  
+                        <a href="/#/product/${
+                          product._id
+                        }" class="icon__btn" title="Adicionar ao carrinho">
+                           <span class="material-icons">
+                              shopping_cart
+                           </span>
+                          </a> 
+                         <a href="/#/product/${
+                           product._id
+                         }" class="icon__btn" title="Ver detalhes">
+                            <span class="material-icons">
+                                visibility
+                            </span>
+                          </a> 
+                        </div>
+
+                        <div class="sales__grid--info">
+                          <p>${product.name}</p>
+                          <div class="sales__grid--price">
+                              <span class="old-price">R$ ${
+                                product.price
+                              },99</span> 
+                              <span>R$ ${(
+                                product.price -
+                                (product.price - (72 / 100) * product.price)
+                              ).toFixed(0)},99</span>  
                           </div>
-                     </div>
-                    </div>
+                          <div class="sales__grid--rating" title="Avaliações de clientes">
+                              ${Rating.render({ value: product.rating })}
+                          </div>
+                        </div>    
+                    </div> 
                `
                  )
                  .join("\n")}
@@ -129,36 +89,39 @@ const HomeView = {
             </section>
 
             <!--++++++++ user comments carousel ++++++++-->
-            <section class="customers">
-              <div class="d-flex jc-center al-center m-height">
-                <h1 class="upper">O que dizem nossos clientes</h1>
-              </div>
-
-              <div class="customers__carousel">
-
-                <div class="customers__slides">   
-                   ${customerComments
-                     .map(
-                       (comment) => `
-                       <div class="customers__slides--item"> 
-                          <img src="${comment.customerImage}" alt="${comment.customerName}" /> 
-                            <h4>
-                            "${comment.customerComment}" -
-                            </h4>
-                        <br />
-                        <small>${comment.customerName} - Cliente</small>
-                        <div>${comment.customerRating}</div> 
-                      </div>
-                     `
-                     )
-                     .join("\n")}  
+            <section class="carousel pr-pl">
+                <div class="d-flex jc-center al-center m-height">
+                  <h1 class="upper">O que dizem nossos clientes</h1>
                 </div>
+               
+                <div class="carousel__slider" id="homepage-slider"> 
+                  <input type="radio" class="carousel__slider--radio radio" name="slider" id="slide1"/>
+                  <input type="radio" class="carousel__slider--radio radio" name="slider" id="slide2"/>
+                  <input type="radio" class="carousel__slider--radio radio" name="slider" id="slide3"/>
+                  <input type="radio" class="carousel__slider--radio radio" name="slider" id="play1" checked=""/>
 
-                <div class="controls">
-                <div class="control prev-slide" title="Voltar slide">&#9668;</div>
-                <div class="control next-slide" title="Próximo slide">&#9658;</div>
-                </div>
-               </div>
+                <div class="carousel__images">
+                  <div class="carousel__images--inner">  
+                  ${customerComments
+                    .map(
+                      (comment) => `
+                       <div class="carousel__images--slide"> 
+                          <img src="${comment.customerImage}" alt="Cliente" /> 
+                           <h4>
+                             "${comment.customerComment}"
+                           </h4>
+                            <br />
+                             <small>${comment.customerName} - Cliente</small>
+                             <span>${Rating.render({
+                               value: comment.customerRating,
+                             })}</span>   
+                       </div> 
+                    `
+                    )
+                    .join("\n")}
+                  </div>
+                </div> 
+              </div> 
             </section>
             
             <!--++++++ Bestsellers ++++++-->
@@ -172,35 +135,41 @@ const HomeView = {
                   .map(
                     (product) => `
                     <div class="sales__grid--card">
-                      <a href="/#/product/${product._id}">
-                        <img src="${product.image}" alt="${product.name}" />
-                      </a>
-                        <div class="sales__grid--actions">
-                            <span class="material-icons jc-center al-center" title="Favoritar">favorite</span>
-                            <span class="material-icons jc-center al-center"title="Adicionar ao corrinho">shopping_bag</span>
-                            <span class="material-icons jc-center al-center look" title="Espiar">remove_red_eye</span>
-                        </div>
+                     <img src="${product.image}" alt="${product.name}" />
+
+                      <div class="sales__grid--actions"> 
+                        <a href="/#/product/${
+                          product._id
+                        }" class="icon__btn" title="Adicionar ao carrinho">
+                          <span class="material-icons">
+                              shopping_cart
+                           </span>
+                          </a> 
+                          
+                         <a href="/#/product/${
+                           product._id
+                         }" class="icon__btn" title="Ver detalhes">
+                            <span class="material-icons">
+                                visibility
+                            </span>
+                          </a> 
+                      </div>
+
                         <div class="sales__grid--info">
-                            <h5>${product.brand}</h5>
+                            <p>${product.name}</p>
                             <div class="sales__grid--price"> 
                                 <span>R$ ${product.price}.99</span>
                             </div>
                             <div class="sales__grid--rating" title="Avaliações de clientes">
-                                <span class="material-icons">star</span>
-                                <span class="material-icons">star</span>
-                                <span class="material-icons">star</span>
-                                <span class="material-icons">star</span>
-                                <span class="material-icons">star</span>
+                               ${Rating.render({ value: product.rating })}
                             </div>
                         </div>
-                    </div> 
+                    </div>  
                 `
                   )
                   .join("\n")}
-                </div> 
-
- 
-            </section>
+                </div>  
+            </section> 
         `;
   },
 };
