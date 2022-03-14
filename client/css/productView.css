@@ -51,6 +51,7 @@
 
 .product__detail--price {
   flex-direction: column;
+  margin-bottom: 20px;
 }
 
 .product__detail--price h3 span {
@@ -63,6 +64,11 @@
   font-style: italic;
   font-weight: normal;
   opacity: 0.95;
+}
+
+.product__detail--price h5 {
+  font-weight: normal;
+  margin-top: 10px;
 }
 
 .product__detail--button .main-btn.disabled {

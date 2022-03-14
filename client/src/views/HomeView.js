@@ -5,8 +5,16 @@ import { getProduct } from "../api";
 import Rating from "../components/Rating.js";
 import axios from "axios";
 
-//
 const HomeView = {
+  switch_render: () => {
+    const iconBtns = document.querySelectorAll(".icon__btn");
+    iconBtns.forEach((iconBtn) => {
+      iconBtn.addEventListener("click", () => {
+        window.scrollTo(0, 0);
+      });
+    });
+  },
+
   render: async () => {
     const resource = await axios({
       url: "http://localhost:5000/api/products",
@@ -35,7 +43,7 @@ const HomeView = {
      </div>
             
       <!--++++++++ Sales grid ++++++++-->
-       <section class="sales mt-mb pr-pl" id="sales">
+       <section class="sales mt-mb pr-pl" id="sales">  
          <div class="sales__title d-flex jc-center al-center m-height">
          <h1 class="upper">Nossas ofertas</h1> 
 
@@ -48,22 +56,32 @@ const HomeView = {
                     <div class="sales__grid--card">
                         <span>Em promoção</span>
                         <img src="${product.image}" alt="${product.name}" />
-
+    
                         <div class="sales__grid--actions">  
-                        <a href="/#/product/${
-                          product._id
-                        }" class="icon__btn" title="Adicionar ao carrinho">
-                           <span class="material-icons">
-                              shopping_cart
-                           </span>
-                          </a> 
-                         <a href="/#/product/${
-                           product._id
-                         }" class="icon__btn" title="Ver detalhes">
-                            <span class="material-icons">
-                                visibility
+                          ${
+                            product.countStock < 1
+                              ? `
+                            <span class="shopping__btn icon__btn" title="Produto indisponível">
+                                <span class="material-icons">
+                                  remove_shopping_cart
+                                </span>
                             </span>
-                          </a> 
+                            `
+                              : ` 
+                            <a href="/#/cart/${product._id}" class="shopping__btn icon__btn" title="Adicionar ao carrinho">
+                                <span class="material-icons">
+                                    shopping_cart
+                                </span>
+                            </a> 
+                          `
+                          } 
+                            <a href="/#/product/${
+                              product._id
+                            }" class="icon__btn" title="Ver detalhes">
+                                <span class="material-icons">
+                                    visibility
+                                </span>
+                              </a> 
                         </div>
 
                         <div class="sales__grid--info">
@@ -71,11 +89,11 @@ const HomeView = {
                           <div class="sales__grid--price">
                               <span class="old-price">R$ ${
                                 product.price
-                              },99</span> 
+                              }</span> 
                               <span>R$ ${(
                                 product.price -
                                 (product.price - (72 / 100) * product.price)
-                              ).toFixed(0)},99</span>  
+                              ).toFixed(2)}</span>  
                           </div>
                           <div class="sales__grid--rating" title="Avaliações de clientes">
                               ${Rating.render({ value: product.rating })}
@@ -136,29 +154,37 @@ const HomeView = {
                     (product) => `
                     <div class="sales__grid--card">
                      <img src="${product.image}" alt="${product.name}" />
-
-                      <div class="sales__grid--actions"> 
-                        <a href="/#/product/${
-                          product._id
-                        }" class="icon__btn" title="Adicionar ao carrinho">
-                          <span class="material-icons">
-                              shopping_cart
-                           </span>
-                          </a> 
-                          
-                         <a href="/#/product/${
-                           product._id
-                         }" class="icon__btn" title="Ver detalhes">
-                            <span class="material-icons">
-                                visibility
+                     <div class="sales__grid--actions">  
+                          ${
+                            product.countStock < 1
+                              ? `
+                            <span class="shopping__btn icon__btn" title="Produto indisponível">
+                                <span class="material-icons">
+                                  remove_shopping_cart
+                                </span>
                             </span>
-                          </a> 
-                      </div>
+                            `
+                              : ` 
+                            <a href="/#/cart/${product._id}" class="shopping__btn icon__btn" title="Adicionar ao carrinho">
+                                <span class="material-icons">
+                                    shopping_cart
+                                </span>
+                            </a> 
+                          `
+                          } 
+                            <a href="/#/product/${
+                              product._id
+                            }" class="icon__btn" title="Ver detalhes">
+                                <span class="material-icons">
+                                    visibility
+                                </span>
+                              </a> 
+                        </div>
 
                         <div class="sales__grid--info">
                             <p>${product.name}</p>
                             <div class="sales__grid--price"> 
-                                <span>R$ ${product.price}.99</span>
+                                <span>R$ ${product.price}</span>
                             </div>
                             <div class="sales__grid--rating" title="Avaliações de clientes">
                                ${Rating.render({ value: product.rating })}
@@ -168,7 +194,7 @@ const HomeView = {
                 `
                   )
                   .join("\n")}
-                </div>  
+                </div>   
             </section> 
         `;
   },

@@ -3,7 +3,7 @@ import { getProduct } from "../api";
 import Rating from "../components/Rating";
 
 const ProductView = {
-  after_render: () => {
+  switch_render: () => {
     const request = parseRequestUrl();
     const addBtn = document.getElementById("add-button");
     addBtn.addEventListener("click", () => {
@@ -52,33 +52,43 @@ const ProductView = {
                                 ${
                                   product.price < 62
                                     ? `
-                                <h3 class="old-price">R$ ${
-                                  product.price
-                                },99</h3>
+                                <h3 class="old-price">R$ ${product.price}</h3>
 
                                 <h3>R$ ${(
                                   product.price -
                                   (product.price - (72 / 100) * product.price)
-                                ).toFixed(0)},99 <span>À vista</span>
+                                ).toFixed(2)}<span> à vista</span>
                                 </h3> 
                                 `
-                                    : `<span>R$ ${product.price},99</span>`
+                                    : `<span>R$ ${product.price}</span>`
                                 }
                           </div>
                           <h4>ou 6x sem juros</h4>
+
+                          <h5>Cor: ${product.color}</h5>
                         </div>
 
-                    </div> 
-                      <br>
+                    </div>  
                     
                     <div class="product__detail--button"> 
                       ${
                         product.countStock > 1
                           ? `
-                          <button type="button" class="main-btn filled" id="add-button"  title="Adicionar ao carrinho">Adicionar ao carrinho</button> 
+                          <button 
+                            type="button" 
+                            class="main-btn filled" 
+                            id="add-button" 
+                            title="Adicionar ao carrinho">
+                            Adicionar ao carrinho
+                        </button> 
                           `
                           : ` 
-                          <button type="button" class="main-btn filled disabled" title="Esgotado">Adicionar ao carrinho</button>
+                          <button 
+                            type="button" 
+                            class="main-btn filled disabled" 
+                            title="Esgotado">
+                             Adicionar ao carrinho
+                          </button>
                         `
                       } 
                     </div>

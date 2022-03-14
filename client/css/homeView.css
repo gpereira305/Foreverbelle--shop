@@ -43,6 +43,7 @@
 .nav__menu a {
   margin-right: 5px;
   color: var(--black-color);
+  display: flex;
 }
 
 .nav__banner {
@@ -87,10 +88,13 @@
 */
 .main {
   width: 100%;
+  position: relative;
 }
 
 .sales {
   margin-bottom: 5%;
+  position: relative;
+  overflow: hidden;
 }
 
 .sales__title {
@@ -187,6 +191,18 @@
 .sales__grid--rating .material-icons {
   font-size: 16px;
   margin-top: 8px;
+}
+
+.side__modal {
+  position: absolute;
+  width: 25%;
+  right: -30%;
+  /* right: 0; */
+  top: 0;
+  z-index: 102;
+  height: 102.1%;
+  background-color: tomato;
+  transition: var(--transition);
 }
 
 /* 

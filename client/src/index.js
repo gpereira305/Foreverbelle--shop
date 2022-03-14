@@ -1,6 +1,7 @@
+import NotFoundView from "./views/NotFoundView.js";
 import HomeView from "./views/HomeView.js";
 import ProductView from "./views/ProductView.js";
-import NotFoundView from "./views/NotFoundView.js";
+import CartView from "./views/CartView.js";
 
 import { parseRequestUrl } from "./utils";
 
@@ -8,6 +9,8 @@ import { parseRequestUrl } from "./utils";
 const routes = {
   "/": HomeView,
   "/product/:id": ProductView,
+  "/cart/:id": CartView,
+  "/cart": CartView,
 };
 
 //  RENDER HOME SCREEN METHOD
@@ -22,7 +25,7 @@ const router = async () => {
 
   const main = document.getElementById("main-container");
   main.innerHTML = await screen.render();
-  await screen.after_render();
+  await screen.switch_render();
 
   //  NAVBAR ANIMATION
   const nav = document.querySelector(".nav__container");
@@ -52,14 +55,6 @@ const router = async () => {
       didScroll = false;
     }
   }, 250);
-
-  //  GO TO THE TOP OF THE PAGE
-  const iconBtns = document.querySelectorAll(".icon__btn");
-  iconBtns.forEach((iconBtn) => {
-    iconBtn.addEventListener("click", () => {
-      window.scrollTo(0, 0);
-    });
-  });
 
   //  GET CURRENT YEAR
   const currentDate = new Date().getFullYear();
