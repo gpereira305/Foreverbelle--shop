@@ -67,7 +67,6 @@ html {
 
 body {
   width: 100%;
-  /* min-height: 100vh; */
   background-color: var(--body-color);
   font-size: 1.6rem;
   position: relative;

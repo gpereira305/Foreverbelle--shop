@@ -31,8 +31,10 @@ const ProductView = {
               </div>  
 
             <div class="product__detail d-flex"> 
-              <div class="product__detail--image">
-                  <img src="${product.image}" alt="${product.name}" />
+              <div class="product__detail--image" id="product__container">
+                  <img src="${product.image}" alt="${
+        product.name
+      }" id="product__img"/>
               </div>
 
                 <div class="product__detail--info">

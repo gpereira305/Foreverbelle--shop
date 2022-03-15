@@ -1,4 +1,4 @@
-import customerComments from "../data";
+import { customerComments, instagramPosts } from "../data";
 import { parseRequestUrl } from "../utils";
 import { getProduct } from "../api";
 
@@ -55,7 +55,12 @@ const HomeView = {
                    (product) => `
                     <div class="sales__grid--card">
                         <span>Em promoção</span>
-                        <img src="${product.image}" alt="${product.name}" />
+                        <div class="sales__grid--card_img">
+                            <img src="${product.image}" alt="${product.name}" />
+                            <img class="image-alt" src="${
+                              product.imageAlt
+                            }" alt="${product.name}" />
+                        </div>
     
                         <div class="sales__grid--actions">  
                           ${
@@ -129,10 +134,10 @@ const HomeView = {
                              "${comment.customerComment}"
                            </h4>
                             <br />
-                             <small>${comment.customerName} - Cliente</small>
-                             <span>${Rating.render({
-                               value: comment.customerRating,
-                             })}</span>   
+                            <small>${comment.customerName} - Cliente</small>
+                            <span>${Rating.render({
+                              value: comment.customerRating,
+                            })}</span>   
                        </div> 
                     `
                     )
@@ -153,7 +158,12 @@ const HomeView = {
                   .map(
                     (product) => `
                     <div class="sales__grid--card">
-                     <img src="${product.image}" alt="${product.name}" />
+                    <div class="sales__grid--card_img">
+                            <img src="${product.image}" alt="${product.name}" />
+                            <img class="image-alt" src="${
+                              product.imageAlt
+                            }" alt="${product.name}" />
+                        </div>
                      <div class="sales__grid--actions">  
                           ${
                             product.countStock < 1
@@ -178,7 +188,7 @@ const HomeView = {
                                 <span class="material-icons">
                                     visibility
                                 </span>
-                              </a> 
+                            </a> 
                         </div>
 
                         <div class="sales__grid--info">
@@ -195,6 +205,28 @@ const HomeView = {
                   )
                   .join("\n")}
                 </div>   
+
+                <!--++++++++ Instagram posts carousel ++++++++-->
+                <section class="instagram__slider">
+                    <div class="instagram__slider--title d-flex jc-center al-center">
+                        <h1 class="upper">Nosso Instagram</h1>
+                    </div>
+
+                    <div class="instagram__slider--track">
+                        ${instagramPosts
+                          .map(
+                            (post) => `
+                          <div class="instagram__slider--slide"  title="Post do Instagram">
+                            <span>
+                              <img src="${post.instaLogo}" alt="Instagram"/>
+                            </span>
+                            <img src="${post.instaImg}" alt="Post do Instagram" />
+                          </div> 
+                        `
+                          )
+                          .join("\n")} 
+                    </div>
+                  </section>
             </section> 
         `;
   },

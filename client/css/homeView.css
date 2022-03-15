@@ -130,7 +130,23 @@
   left: 3px;
 }
 
-.sales__grid--card img {
+.sales__grid--card_img {
+  position: relative;
+}
+
+.sales__grid--card_img .image-alt {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: var(--transition);
+}
+
+.image-alt:hover {
+  opacity: 1;
+}
+
+.sales__grid--card_img img {
   max-width: 200px;
   min-width: fill-available;
   min-width: -webkit-fill-available;
@@ -145,6 +161,7 @@
   opacity: 0;
   bottom: 25%;
   transition: var(--transition);
+  z-index: 10;
 }
 
 .sales__grid--card:hover .sales__grid--actions {
@@ -274,6 +291,93 @@
 
 .notfound__text a:hover {
   text-decoration: underline;
+}
+
+/* 
+*============================
+*      INSTAGRAM CAROUSEL
+*============================
+*/
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-250px * 7));
+  }
+}
+
+.instagram__slider {
+  /* height: 250px; */
+  min-height: 70vh;
+  margin: auto;
+  overflow: hidden;
+  position: relative;
+}
+
+.instagram__slider--title {
+  min-height: 25vh;
+}
+
+.instagram__slider::before,
+.instagram__slider::after {
+  content: "";
+  height: 100px;
+  position: absolute;
+  width: 200px;
+  z-index: 2;
+}
+
+.instagram__slider::after {
+  right: 0;
+  top: 0;
+  transform: rotateZ(180deg);
+}
+
+.instagram__slider::before {
+  left: 0;
+  top: 0;
+}
+
+.instagram__slider--track {
+  animation: scroll 40s linear infinite;
+  display: flex;
+  width: calc(250px * 14);
+  background: var(--light-pink);
+  padding: 8% 0;
+}
+
+.instagram__slider--slide {
+  padding-left: 20px;
+  position: relative;
+}
+
+.instagram__slider--slide > span {
+  position: absolute;
+  width: 94.5%;
+  height: 97.3%;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.65);
+  z-index: 1;
+  opacity: 0;
+  transition: var(--transition);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.instagram__slider--slide > span:hover {
+  opacity: 1;
+}
+
+.instagram__slider--slide > span > img {
+  width: 12%;
+}
+
+.instagram__slider--slide img {
+  width: 340px;
+  height: 240px;
 }
 
 /* 
