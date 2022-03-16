@@ -42,7 +42,7 @@ const CartView = {
       "cart__img--select-selector"
     );
     Array.from(qtySelects).forEach((qtySelect) => {
-      qtySelect.addEventListener("change", (e) => {
+      qtySelect.onchange = (e) => {
         const item = getCartItems().find((i) => i.product === qtySelect.id);
         addToCart(
           {
@@ -51,29 +51,27 @@ const CartView = {
           },
           true
         );
-      });
+      };
     });
 
     // deleta o item do carrinho
     const deleteItems = document.getElementsByClassName("delete-btn");
     Array.from(deleteItems).forEach((deleteItem) => {
-      deleteItem.addEventListener("click", () => {
+      deleteItem.onclick = () => {
         if (confirm("Deseja mesmo remover esse item?")) {
           removeItemFromCart(deleteItem.id);
         }
-      });
-    });
+      };
 
-    // redireciona o usuário pra o cadastro na loja antes do checkout
-    const checkoutItem = document.getElementById("checkout-btn");
-    checkoutItem.addEventListener("click", () => {
-      document.location.hash = "/signin";
+      // redireciona o usuário pra o cadastro na loja antes do checkout
+      const checkoutItem = document.getElementById("checkout-btn");
+      checkoutItem.onclick = () => {
+        document.location.hash = "/signin";
+      };
     });
   },
   render: async () => {
     const request = parseRequestUrl();
-    const confirmModal = document.getElementById("confirm__modal");
-    const removeModal = document.getElementById("remove__modal");
 
     if (request.id) {
       const product = await getProduct(request.id);

@@ -1,0 +1,95 @@
+.register {
+  width: 100%;
+  min-height: 112vh;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.register__form {
+  width: 100%;
+  max-width: 550px;
+  padding: 20px;
+  background: var(--white-color);
+}
+
+.register__form--title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.register__form--title h1 {
+  font-weight: normal;
+}
+
+.register__form--mail,
+.register__form--password {
+  flex-direction: column;
+  margin-bottom: 35px;
+}
+
+.register__form--mail input,
+.register__form--password input {
+  border: none;
+  padding: 20px 10px 5px;
+  border-bottom: 2px solid var(--light-pink);
+  outline: none;
+  background: inherit;
+  font-size: 16px;
+}
+
+.register__form--mail input:focus,
+.register__form--password input:focus {
+  border-bottom: 2px solid var(--green-color);
+}
+
+.register__form--mail input::placeholder,
+.register__form--password input::placeholder {
+  font-style: italic;
+  color: #ccc;
+}
+
+.register__form--submit {
+  text-align: center;
+  margin-bottom: 45px;
+}
+
+.register__form--submit button {
+  width: 35%;
+}
+
+.register__form--register h3 {
+  margin-right: 10px;
+  font-size: 16px;
+}
+
+.register__form--register a {
+  color: var(--black-color);
+  font-size: 14px;
+  font-style: italic;
+  opacity: 0.7;
+  text-decoration: underline;
+  transition: var(--transition);
+}
+
+.register__form--register a:hover {
+  opacity: 1;
+}
+
+/* 
+*============================
+*        MEDIA QUERY
+*============================
+*/
+@media (max-width: 624px) {
+  .register {
+    min-height: 130vh;
+  }
+
+  .register__form {
+    margin-top: 20px;
+  }
+
+  .register__form--submit button {
+    width: initial;
+  }
+}

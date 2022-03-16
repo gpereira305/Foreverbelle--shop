@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="./css/homeView.css" />
     <link rel="stylesheet" href="./css/productView.css" />
     <link rel="stylesheet" href="./css/cartView.css" />
+    <link rel="stylesheet" href="./css/registerView.css" />
     <!-- font-face -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -26,11 +27,33 @@
     <title>Forever Belle Store</title>
   </head>
   <body>
+    <!-- overlay carregando -->
+    <div class="overlay" id="loading__overlay">
+      <div class="overlay__fading">
+        <div class="overlay__fading-circle1 overlay__fading-circle"></div>
+        <div class="overlay__fading-circle2 overlay__fading-circle"></div>
+        <div class="overlay__fading-circle3 overlay__fading-circle"></div>
+        <div class="overlay__fading-circle4 overlay__fading-circle"></div>
+        <div class="overlay__fading-circle5 overlay__fading-circle"></div>
+        <div class="overlay__fading-circle6 overlay__fading-circle"></div>
+        <div class="overlay__fading-circle7 overlay__fading-circle"></div>
+        <div class="overlay__fading-circle8 overlay__fading-circle"></div>
+        <div class="overlay__fading-circle9 overlay__fading-circle"></div>
+        <div class="overlay__fading-circle10 overlay__fading-circle"></div>
+        <div class="overlay__fading-circle11 overlay__fading-circle"></div>
+        <div class="overlay__fading-circle12 overlay__fading-circle"></div>
+      </div>
+      <div class="overlay__loading">
+        <h2>Carregando...</h2>
+      </div>
+    </div>
+
+    <div class="overlay" id="message__overlay"></div>
+
+    <!-- header -->
     <header>
-      <!---------- HEADER NAV  ---------->
       <nav class="nav">
-        <!-- carousel nav -->
-        <section class="nav__carousel">
+        <div class="nav__carousel">
           <div class="slider">
             <div class="slide-track">
               <div class="slide">
@@ -56,33 +79,13 @@
               </div>
             </div>
           </div>
-        </section>
+        </div>
 
         <!-- Menus -->
-        <section class="nav__container d-flex sp-between al-center pr-pl">
-          <div class="nav__logo" title="Home | Forever Belle">
-            <h1>
-              <a href="/">Forever Belle</a>
-            </h1>
-          </div>
-
-          <div class="nav__menu">
-            <ul class="d-flex sp-between al-center">
-              <li class="d-flex al-center" title="Logar">
-                <a href="/#/">
-                  Log in
-                  <span class="material-icons">person</span>
-                </a>
-              </li>
-              <li class="d-flex al-center" title="Ver carrinho">
-                <a href="/#/cart">
-                  Carrinho
-                  <span class="material-icons">shopping_bag</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </section>
+        <div
+          class="nav__container d-flex sp-between al-center pr-pl"
+          id="nav__container"
+        ></div>
       </nav>
     </header>
 

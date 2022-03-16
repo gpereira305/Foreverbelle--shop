@@ -2,8 +2,12 @@ import NotFoundView from "./views/NotFoundView.js";
 import HomeView from "./views/HomeView.js";
 import ProductView from "./views/ProductView.js";
 import CartView from "./views/CartView.js";
+import SignInView from "./views/SignInView";
+import SignUpView from "./views/SignUpView";
+import HeaderView from "./views/HeaderView";
+import ProfileView from "./views/ProfileView";
 
-import { parseRequestUrl } from "./utils";
+import { parseRequestUrl, showLoading, hideLoading } from "./utils";
 
 // ROUTE PATHS
 const routes = {
@@ -11,21 +15,33 @@ const routes = {
   "/product/:id": ProductView,
   "/cart/:id": CartView,
   "/cart": CartView,
+  "/signin": SignInView,
+  "/signup": SignUpView,
+  "/profile": ProfileView,
 };
 
 //  RENDER HOME SCREEN METHOD
 const router = async () => {
+  showLoading();
   const request = parseRequestUrl();
   const parsedUrl =
     (request.resource ? `/${request.resource}` : "/") +
     (request.id ? "/:id" : "") +
     (request.verb ? `/${request.verb}` : "");
 
+  // renderização da página não encontrada
   const screen = routes[parsedUrl] ? routes[parsedUrl] : NotFoundView;
 
+  // renderização do header
+  const header = document.getElementById("nav__container");
+  header.innerHTML = await HeaderView.render();
+  await HeaderView.switch_render();
+
+  // renderização do main
   const main = document.getElementById("main-container");
   main.innerHTML = await screen.render();
-  await screen.switch_render();
+  if (screen.switch_render) await screen.switch_render();
+  hideLoading();
 
   //  NAVBAR ANIMATION
   const nav = document.querySelector(".nav__container");

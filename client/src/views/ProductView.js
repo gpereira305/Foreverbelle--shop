@@ -1,4 +1,4 @@
-import { parseRequestUrl } from "../utils";
+import { parseRequestUrl, showLoading, hideLoading } from "../utils";
 import { getProduct } from "../api";
 import Rating from "../components/Rating";
 
@@ -12,6 +12,7 @@ const ProductView = {
   },
 
   render: async () => {
+    showLoading();
     const request = parseRequestUrl();
     const product = await getProduct(request.id);
     if (product.error) {
@@ -20,6 +21,7 @@ const ProductView = {
             <h1>${product.error}</h1>
           </section>
       `;
+      hideLoading();
     } else {
       return `
           <section class="product d-flex al-center pr-pl">

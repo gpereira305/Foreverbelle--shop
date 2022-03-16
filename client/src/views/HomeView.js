@@ -1,5 +1,5 @@
 import { customerComments, instagramPosts } from "../data";
-import { parseRequestUrl } from "../utils";
+import { parseRequestUrl, showLoading, hideLoading } from "../utils";
 import { getProduct } from "../api";
 
 import Rating from "../components/Rating.js";
@@ -9,22 +9,25 @@ const HomeView = {
   switch_render: () => {
     const iconBtns = document.querySelectorAll(".icon__btn");
     iconBtns.forEach((iconBtn) => {
-      iconBtn.addEventListener("click", () => {
+      iconBtn.onclick = () => {
         window.scrollTo(0, 0);
-      });
+      };
     });
   },
 
   render: async () => {
+    showLoading();
     const resource = await axios({
       url: "http://localhost:5000/api/products",
       headers: {
         "Content-Type": "application/json",
       },
     });
+    hideLoading();
+
     if (!resource || resource.statusText !== "OK") {
       return `
-         <div>
+         <div class="error d-flex al-center pr-pl">
              <h2>Erro ao receber dados!</h2>
          </div>
       `;
@@ -44,10 +47,10 @@ const HomeView = {
             
       <!--++++++++ Sales grid ++++++++-->
        <section class="sales mt-mb pr-pl" id="sales">  
-         <div class="sales__title d-flex jc-center al-center m-height">
-         <h1 class="upper">Nossas ofertas</h1> 
-
+           <div class="sales__title d-flex jc-center al-center m-height">
+            <h1 class="upper">Nossas ofertas</h1>  
           </div>
+ 
             <div class="sales__grid"> 
                ${products
                  .filter((product) => product.price < 62)

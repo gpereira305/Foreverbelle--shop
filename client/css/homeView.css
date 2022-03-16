@@ -36,14 +36,26 @@
 }
 
 .nav__menu {
-  width: 100%;
-  max-width: 250px;
+  max-width: 360px;
+}
+
+.nav__menu ul {
+  gap: 20px;
 }
 
 .nav__menu a {
   margin-right: 5px;
   color: var(--black-color);
   display: flex;
+  font-size: 14px;
+  align-items: end;
+}
+
+.error {
+  width: 100%;
+  min-height: 112vh;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .nav__banner {
@@ -81,6 +93,14 @@
   margin-bottom: 20px;
 }
 
+.nav__banner-text button {
+  background-color: var(--white-color);
+}
+
+.nav__banner-text button a {
+  color: var(--black-color);
+}
+
 /* 
 *===============================
 *       MAIN SECTION
@@ -89,6 +109,7 @@
 .main {
   width: 100%;
   position: relative;
+  min-height: 79vh;
 }
 
 .sales {
@@ -308,7 +329,6 @@
 }
 
 .instagram__slider {
-  /* height: 250px; */
   min-height: 70vh;
   margin: auto;
   overflow: hidden;
@@ -404,15 +424,15 @@
   .sales__grid {
     grid-template-columns: repeat(3, 1fr);
   }
-
-  .nav__menu {
-    display: none;
-  }
 }
 
 @media (max-width: 724px) {
   .nav__logo h1 {
     font-size: 2.2rem;
+  }
+
+  .nav__menu {
+    display: none;
   }
 
   .nav__banner-text h1 {
