@@ -38,3 +38,39 @@ export const getUserInfo = () => {
     ? JSON.parse(localStorage.getItem("userInfo"))
     : { name: "", email: "", password: "" };
 };
+
+// adiciona dados de entrega do usuário se houver no localStorage
+export const getShippingInfo = () => {
+  const shipping = localStorage.getItem("shipping")
+    ? JSON.parse(localStorage.getItem("shipping"))
+    : { address: "", city: "", postalCode: "", country: "" };
+
+  return shipping;
+};
+
+// coleta tos dados de entrega do usuário
+export const setShippingInfo = ({
+  address = "",
+  city = "",
+  postalCode = "",
+  country = "",
+}) => {
+  localStorage.setItem(
+    "shipping",
+    JSON.stringify({ address, city, postalCode, country })
+  );
+};
+
+// adiciona dados de pagamento do usuário se houver no localStorage
+export const getPaymentInfo = () => {
+  const payment = localStorage.getItem("payment")
+    ? JSON.parse(localStorage.getItem("payment"))
+    : { paymentMethod: "paypal" };
+
+  return payment;
+};
+
+// coleta os dados de pagamento do usuário
+export const setPaymentInfo = ({ paymentMethod = "paypal" }) => {
+  localStorage.setItem("payment", JSON.stringify({ paymentMethod }));
+};

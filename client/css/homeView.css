@@ -13,6 +13,7 @@
   position: fixed;
   z-index: 100;
   background-color: var(--black-color);
+  top: 0;
 }
 
 .nav__container {
@@ -60,7 +61,8 @@
 
 .nav__banner {
   position: relative;
-  top: 100px;
+  /* top: 100px; */
+  bottom: 38px;
   background-image: url("../assets/img/banner-img.jpg");
   background-position: center;
   background-repeat: no-repeat;
@@ -110,6 +112,7 @@
   width: 100%;
   position: relative;
   min-height: 79vh;
+  margin-top: 9%;
 }
 
 .sales {
@@ -235,7 +238,6 @@
   position: absolute;
   width: 25%;
   right: -30%;
-  /* right: 0; */
   top: 0;
   z-index: 102;
   height: 102.1%;
@@ -253,6 +255,9 @@
   background-color: var(--black-color);
   color: var(--white-color);
   padding: 20px 5% 5px;
+  position: inherit;
+  bottom: 0;
+  width: 100%;
 }
 
 .footer__contact {
@@ -410,6 +415,10 @@
     height: 60vh;
   }
 
+  .main {
+    margin-top: 12%;
+  }
+
   .sales__grid {
     grid-template-columns: repeat(4, 1fr);
     margin: 5% 0;
@@ -419,6 +428,10 @@
 @media (max-width: 960px) {
   .nav__banner {
     height: 55vh;
+  }
+
+  .main {
+    margin-top: 15%;
   }
 
   .sales__grid {
@@ -437,6 +450,10 @@
 
   .nav__banner-text h1 {
     font-size: 2rem;
+  }
+
+  .main {
+    margin-top: 20%;
   }
 
   .sales__grid {
@@ -474,11 +491,21 @@
     height: 50vh;
   }
 
+  .main {
+    margin-top: 32%;
+  }
+
   .sales__grid {
     grid-template-columns: repeat(1, 1fr);
   }
 
   .sales__grid--actions {
     bottom: 20%;
+  }
+}
+
+@media (max-width: 360px) {
+  .main {
+    margin-top: 40%;
   }
 }

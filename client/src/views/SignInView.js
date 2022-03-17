@@ -1,6 +1,6 @@
 import { signin } from "../api";
 import { getUserInfo, setUserInfo } from "../localStorage";
-import { showLoading, hideLoading, showMessage } from "../utils";
+import { showLoading, hideLoading, showMessage, redirectUser } from "../utils";
 
 const SignInView = {
   switch_render: () => {
@@ -22,15 +22,21 @@ const SignInView = {
         showMessage(data.error);
       } else {
         setUserInfo(data);
-        document.location.hash = "/";
+        redirectUser();
       }
     });
   },
   render: () => {
     if (getUserInfo().name) {
-      document.location.hash = "/";
+      redirectUser();
     }
     return `
+    <br>
+    <br> 
+    <br> 
+    <br> 
+    <br> 
+    
            <section class="register d-flex al-center pr-pl">
                 <form class="register__form" id="signin__form">
                     <div class="register__form--title">
@@ -59,6 +65,8 @@ const SignInView = {
                     </div>
                   </form>
            </section>
+           <br>
+           <br> 
         `;
   },
 };

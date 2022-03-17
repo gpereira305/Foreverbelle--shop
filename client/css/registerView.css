@@ -1,6 +1,6 @@
 .register {
   width: 100%;
-  min-height: 112vh;
+  /* min-height: 112vh; */
   justify-content: center;
   flex-direction: column;
 }
@@ -75,14 +75,128 @@
   opacity: 1;
 }
 
+.register__payment {
+  justify-content: space-around;
+}
+
+/* 
+*============================
+*       CHECKOUTVIEW
+*============================
+*/
+.checkout__steps {
+  width: 100%;
+  max-width: 545px;
+  position: relative;
+}
+
+.checkout__steps h4 {
+  font-weight: normal;
+  opacity: 0.3;
+}
+
+.checkout__steps h4.active {
+  color: salmon;
+  opacity: 1;
+}
+
+/* 
+*============================
+*        PLACEORDERVIEW
+*============================
+*/
+.placeorder {
+  width: 100%;
+  justify-content: center;
+  /* min-height: 100vh; */
+  flex-direction: column;
+  margin-bottom: 5%;
+}
+
+.placeorder__header {
+  flex: 2;
+}
+
+.placeorder__header--steps {
+}
+
+.placeorder__contents {
+  gap: 15px;
+}
+
+.placeorder__info {
+  flex: 2;
+}
+
+.placeorder__info--shipping {
+  margin-bottom: 15px;
+  background-color: var(--white-color);
+  padding: 10px;
+}
+
+.placeorder__info--shipping h1 {
+  margin-bottom: 10px;
+}
+
+.placeorder__info--shipping span {
+  font-weight: normal;
+  font-style: italic;
+  opacity: 0.85;
+}
+
+.placeorder__payment {
+  background-color: var(--white-color);
+  padding: 10px;
+}
+
+.placeorder__cart {
+  margin-top: 20px;
+  flex-direction: column;
+  background-color: var(--white-color);
+  padding: 10px;
+}
+
+.placeorder__cart--detail {
+  gap: 20px;
+  margin-bottom: 10px;
+}
+
+.placeorder__cart--img {
+}
+
+.placeorder__cart--img img {
+  width: 140px;
+}
+
+.placeorder__cart--info {
+  width: 100%;
+}
+
+.placeorder__pay {
+  flex: 1;
+}
 /* 
 *============================
 *        MEDIA QUERY
 *============================
 */
+@media (max-width: 990px) {
+  .placeorder {
+    /* min-height: 120vh; */
+  }
+
+  .placeorder__contents {
+    flex-direction: column;
+  }
+}
+
 @media (max-width: 624px) {
   .register {
-    min-height: 130vh;
+    /* min-height: 138vh; */
+  }
+
+  .checkout__steps h4 {
+    font-size: 11px;
   }
 
   .register__form {
@@ -91,5 +205,25 @@
 
   .register__form--submit button {
     width: initial;
+  }
+
+  .placeorder__cart--detail {
+    flex-direction: column;
+  }
+
+  .placeorder {
+    /* min-height: 130vh; */
+  }
+}
+
+@media (max-width: 424px) {
+  .placeorder__cart--img {
+    width: 100%;
+  }
+}
+
+@media (max-width: 400px) {
+  .placeorder {
+    /* min-height: 145vh; */
   }
 }

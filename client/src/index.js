@@ -6,6 +6,9 @@ import SignInView from "./views/SignInView";
 import SignUpView from "./views/SignUpView";
 import HeaderView from "./views/HeaderView";
 import ProfileView from "./views/ProfileView";
+import ShippingView from "./views/ShippingView";
+import PaymentView from "./views/PaymentView";
+import PlaceOrderView from "./views/PlaceOrderView";
 
 import { parseRequestUrl, showLoading, hideLoading } from "./utils";
 
@@ -18,6 +21,9 @@ const routes = {
   "/signin": SignInView,
   "/signup": SignUpView,
   "/profile": ProfileView,
+  "/shipping": ShippingView,
+  "/payment": PaymentView,
+  "/placeorder": PlaceOrderView,
 };
 
 //  RENDER HOME SCREEN METHOD

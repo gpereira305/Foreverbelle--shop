@@ -106,14 +106,12 @@ const CartView = {
              <a href="/#/" title="Voltar à home">Voltar</a>
           </div>  
             <br>
-            <br>
-            <br>
+            <br> 
            <div>
               <h1>Seu carrinho</h1>
            </div>
               <br>
-              <br>
-              <br>
+              <br> 
 
              <div class="cart__container d-flex">
                 <div class="cart__item d-flex"> 
@@ -187,10 +185,7 @@ const CartView = {
                    </div>
                 </div>
              </div>
-      </section>
-      <br>
-      <br>
-      <br> 
+      </section> 
       `;
     }
   },

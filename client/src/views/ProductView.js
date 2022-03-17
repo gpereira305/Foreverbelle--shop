@@ -6,9 +6,7 @@ const ProductView = {
   switch_render: () => {
     const request = parseRequestUrl();
     const addBtn = document.getElementById("add-button");
-    addBtn.addEventListener("click", () => {
-      document.location.hash = `/cart/${request.id}`;
-    });
+    addBtn.onclick = () => (document.location.hash = `/cart/${request.id}`);
   },
 
   render: async () => {
@@ -44,11 +42,7 @@ const ProductView = {
                   ${Rating.render({ value: product.rating })}
 
                     <div class="product__detail--stock">
-                      ${
-                        product.countStock > 0
-                          ? `<span class="success">Em estoque</span>`
-                          : `<span class="error">Esgotado</span>`
-                      } 
+                    <span class="success">Em estoque</span>
                       <br />
 
                         <div class="product__detail--price d-flex">
@@ -75,26 +69,13 @@ const ProductView = {
                     </div>  
                     
                     <div class="product__detail--button"> 
-                      ${
-                        product.countStock > 1
-                          ? `
-                          <button 
+                        <button 
                             type="button" 
-                            class="main-btn filled" 
                             id="add-button" 
+                            class="main-btn filled "  
                             title="Adicionar ao carrinho">
                             Adicionar ao carrinho
-                        </button> 
-                          `
-                          : ` 
-                          <button 
-                            type="button" 
-                            class="main-btn filled disabled" 
-                            title="Esgotado">
-                             Adicionar ao carrinho
-                          </button>
-                        `
-                      } 
+                        </button>  
                     </div>
                     <br>
 

@@ -1,6 +1,6 @@
 .product {
   width: 100%;
-  min-height: 115vh;
+  /* min-height: 115vh; */
   justify-content: center;
   flex-direction: column;
 }

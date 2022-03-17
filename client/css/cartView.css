@@ -29,10 +29,10 @@
 
 .cart {
   width: 100%;
-  min-height: 79vh;
+  /* min-height: 79vh; */
   flex-direction: column;
   position: relative;
-  top: 137px;
+  /* top: 137px; */
   margin-bottom: 8%;
 }
 

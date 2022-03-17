@@ -1,6 +1,6 @@
 import { signup } from "../api";
 import { getUserInfo, setUserInfo } from "../localStorage";
-import { showLoading, hideLoading, showMessage } from "../utils";
+import { showLoading, hideLoading, showMessage, redirectUser } from "../utils";
 
 const SigUpView = {
   switch_render: () => {
@@ -24,11 +24,15 @@ const SigUpView = {
         showMessage(data.error);
       } else {
         setUserInfo(data);
-        document.location.hash = "/";
+        redirectUser();
       }
     });
   },
   render: () => {
+    if (getUserInfo().name) {
+      redirectUser();
+    }
+
     return `
              <section class="register d-flex al-center pr-pl">
                   <form class="register__form" id="signup__form">
