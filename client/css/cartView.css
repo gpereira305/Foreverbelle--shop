@@ -28,11 +28,9 @@
 */
 
 .cart {
-  width: 100%;
-  /* min-height: 79vh; */
+  width: 100%; 
   flex-direction: column;
-  position: relative;
-  /* top: 137px; */
+  position: relative; 
   margin-bottom: 8%;
 }
 

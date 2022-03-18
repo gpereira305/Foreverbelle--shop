@@ -1,20 +1,13 @@
 import { getUserInfo } from "../localStorage";
+import {toUpper} from '../config'
 
 const HeaderView = {
   render: () => {
     const { name } = getUserInfo();
     // limita a quntidade de caracteres do nome do usuário
-    const reducedName = name.length > 10 ? name.substring(0, 10) + "..." : name;
+     const reducedName = name.length > 10 ? name.substring(0, 10) + "..." : name;
 
-    // deixa a primeira letra do nome do usuário maiúscula
-    const toUpper = (str) => {
-      return str
-        .toLowerCase()
-        .split(" ")
-        .map((word) => word[0].toUpperCase() + word.substr(1))
-        .join(" ");
-    };
-
+ 
     return ` 
         <div class="nav__logo" title="Home | Forever Belle">
             <h1>

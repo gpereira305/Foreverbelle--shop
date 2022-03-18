@@ -4,15 +4,13 @@ import CheckoutSteps from "../components/CheckoutSteps";
 const PaymentView = {
   switch_render: () => {
     const form = document.getElementById("payment__form");
-    const paymentMethod = document.querySelector(
-      'input[name="payment-method"]:checked'
-    );
 
     // ação de coleta de dados de entrega do usuário
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
-      paymentMethod.value;
-
+      const paymentMethod = document.querySelector(
+        'input[name="payment-method"]:checked'
+      ).value;
       setPaymentInfo({ paymentMethod });
 
       document.location.hash = "/placeorder";
@@ -38,12 +36,18 @@ const PaymentView = {
   
                   <div class="register__payment d-flex">
                      <div>
-                          <label for="address">PayPal</label>
+                          <label for="paypal">PayPal</label>
                           <input type="radio" name="payment-method" id="paypal" value="Paypal" checked/>
                       </div>
+
                       <div>
-                        <label for="address">Pix</label>
-                        <input type="radio" name="payment-method" id="stripe" value="Stripe"/> 
+                        <label for="pix">Pix</label>
+                        <input type="radio" name="payment-method" id="pix" value="Pix"/> 
+                      </div>
+
+                      <div>
+                        <label for="bitcoin">Bitcoin</label>
+                        <input type="radio" name="payment-method" id="bitcoin" value="Bitcoin"/> 
                       </div>
                   </div>  
                   <br>

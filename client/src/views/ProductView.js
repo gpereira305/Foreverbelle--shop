@@ -19,8 +19,8 @@ const ProductView = {
             <h1>${product.error}</h1>
           </section>
       `;
-      hideLoading();
     } else {
+      hideLoading();
       return `
           <section class="product d-flex al-center pr-pl">
               <div class="product__back d-flex">
@@ -32,9 +32,7 @@ const ProductView = {
 
             <div class="product__detail d-flex"> 
               <div class="product__detail--image" id="product__container">
-                  <img src="${product.image}" alt="${
-        product.name
-      }" id="product__img"/>
+                  <img src="${product.image}" alt="${product.name}" id="product__img"/>
               </div>
 
                 <div class="product__detail--info">

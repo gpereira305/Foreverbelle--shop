@@ -1,18 +1,27 @@
-import { getCartItems, getShippingInfo, getPaymentInfo } from "../localStorage";
+import {
+  getCartItems,
+  getShippingInfo,
+  getPaymentInfo,
+  clearCartItems,
+} from "../localStorage";
 import CheckoutSteps from "../components/CheckoutSteps";
+import { toUpper } from "../config";
+import { createOrder } from "../api";
+import { showLoading, hideLoading, showMessage } from "../utils";
 
 const convertCartItemsToOrder = () => {
   const orderItems = getCartItems();
-  const shipping = getShippingInfo();
-  const payment = getPaymentInfo();
-
-  console.log(payment);
-
   if (orderItems.length === 0) {
-    document.location.hash = "/";
-  } else if (!shipping.address) {
+    document.location.hash = "/cart";
+  }
+
+  const shipping = getShippingInfo();
+  if (!shipping.address) {
     document.location.hash = "/shipping";
-  } else if (!payment.paymentMethod) {
+  }
+
+  const payment = getPaymentInfo();
+  if (!payment.paymentMethod) {
     document.location.hash = "/payment";
   }
 
@@ -30,7 +39,24 @@ const convertCartItemsToOrder = () => {
 };
 
 const PlaceOrderView = {
-  switch_render: () => {},
+  switch_render: async () => {
+    const handlePlaceOrder = document.getElementById("placeorder-btn");
+    handlePlaceOrder.onclick = async () => {
+      const order = convertCartItemsToOrder();
+      showLoading();
+      const data = await createOrder(order);
+      hideLoading();
+      if (data.error) {
+        showMessage(data.error);
+      } else {
+        clearCartItems();
+        showLoading();
+        setTimeout(() => {
+          document.location.hash = `/order/${data.order._id}`;
+        }, 2500);
+      }
+    };
+  },
 
   render: () => {
     const { orderItems, calcItemsPrice, payment, shipping } =
@@ -52,38 +78,52 @@ const PlaceOrderView = {
                 <div class="placeorder__info">
                     <div class="placeorder__info--shipping">
                         <h1>Endereço de entrega</h1> 
-                        <h5>Cidade: <span>${shipping.city}</span></h5>
-                        <h5>Endereço: <span>${shipping.address}</span></h5>
-                        <h5>CEP: <span>${shipping.postalCode}</span></h5>
-                        <h5>País: <span>${shipping.country}</span></h5>   
+                        <h5>Cidade: <span>${toUpper(shipping.city)}</span></h5>
+                        <h5>Endereço: <span>${toUpper(
+                          shipping.address
+                        )}</span></h5>
+                        <h5>CEP: <span>${toUpper(
+                          shipping.postalCode
+                        )}</span></h5>
+                        <h5>País: <span>${toUpper(
+                          shipping.country
+                        )}</span></h5>   
                     </div>
 
                     <div class="placeorder__payment">
-                        <h1>Pagamento</h1>
+                        <h1>Forma de pagamento</h1>
                         <h5>${payment.paymentMethod}</h5> 
                     </div>
 
                     <div class="placeorder__cart d-flex">
-                        <h1>Itens no carrinho</h1>
+                        <h1>Itens no seu carrinho</h1>
 
                           ${orderItems
                             .map(
                               (item) => `
-                            <div class="placeorder__cart--detail d-flex">
-                                <div class="placeorder__cart--img">
-                                   <img src="${item.image}" alt="${item.name}"/>
-                                </div> 
-                                <div class="placeorder__cart--info">
-                                    <h4>${item.name}</h4>
-                                    <h4>
-                                    Quantidade:
-                                    <span>${item.qty} itens</span>
-                                    <span>Cor: ${item.color}</span>
-                                    </h4>
-    
-                                    <h3>Preço: R$ ${item.price}</h3>
-                                </div>
-                            </div>  
+                                <div class="placeorder__cart--detail d-flex">
+                                    <div class="placeorder__cart--img">
+                                      <img src="${item.image}" alt="${
+                                item.name
+                              }"/>
+                                    </div> 
+                                    <div class="placeorder__cart--info">
+                                        <h4>${item.name}</h4>
+                                        <h3>
+                                           Quantidade:
+                                          <span>${item.qty} ${
+                                item.qty > 1 ? "itens" : "item"
+                              }</span>  
+                                        </h3>
+                                        <h3>Cor: <span> ${
+                                          item.color
+                                        }</span></h3>
+        
+                                        <h3>Preço: <span> R$ ${item.price.toFixed(
+                                          2
+                                        )} à vista</span></h3>
+                                    </div>
+                                </div>  
                           `
                             )
                             .join("\n")}
@@ -91,23 +131,31 @@ const PlaceOrderView = {
                   </div>
 
                   <div class="placeorder__pay"> 
-                    <div class=""> 
+                     <h1>Resumo da compra</h1>
+                    <h2>
+                      Total: 
+                      <span>
+                        ${orderItems.reduce((a, c) => a + c.qty, 0)} 
+                        ${orderItems.length > 1 ? "itens" : "item"}
+                      </span> 
+                    </h2> 
+
+                     <div class="placeorder__pay-total">
                         <h2>
-                          Total de itens: 
-                          <span>(${orderItems.reduce(
-                            (a, c) => a + c.qty,
-                            0
-                          )})</span> 
-                        </h2>
-                        <h3>
-                           Valor total: 
-                           <span>R$ ${calcItemsPrice} à vista</span>
-                        </h3> 
-                           <p>Ou 6x sem juros</p>
-                           <button type="button" class="main-btn filled" id="checkout-btn">
-                             Ir para checkout
-                        </button>
-                    </div> 
+                            Valor total: 
+                            <span>R$ ${calcItemsPrice.toFixed(2)} à vista</span>
+                        </h2> 
+                        
+                        <p>Ou 6x sem juros</p>
+                        <br>
+                        <button type="button" 
+                          class="main-btn filled" 
+                          id="placeorder-btn"
+                          title="Finalizar compra"
+                        >
+                          Finalizar compra  
+                      </button> 
+                     </div>
                  </div> 
                </div>  
            </div> 

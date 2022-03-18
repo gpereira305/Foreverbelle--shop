@@ -119,9 +119,10 @@ const CartView = {
                   .map(
                     (item) => `
                   <div class="cart__img d-flex">
-                  <span class="material-icons delete-btn" title="Remover item" id="${
-                    item.product
-                  }">cancel</span>
+                  <span class="material-icons delete-btn" 
+                    title="Remover item" id="${item.product}">
+                      cancel
+                  </span>
                       <img src="${item.image}" alt="${item.name}">
 
                       <div class="cart__img-info">
@@ -179,7 +180,7 @@ const CartView = {
                             .toFixed(2)} à vista</span>
                         </h3> 
                         <p>Ou 6x sem juros</p>
-                        <button type="button" class="main-btn filled" id="checkout-btn">
+                        <button type="button" class="main-btn filled" id="checkout-btn" title="Ir para checkout">
                           Ir para checkout
                         </button>
                    </div>

@@ -113,10 +113,10 @@
 *============================
 */
 @media (max-width: 1124px) {
-  .product {
+  /* .product {
     position: relative;
     top: 30px;
-  }
+  } */
 
   .product__detail--image img {
     width: 95%;
@@ -150,9 +150,9 @@
 }
 
 @media (max-width: 724px) {
-  .product {
+  /* .product {
     top: 50px;
-  }
+  } */
 
   .product__detail--image {
     width: 100%;
@@ -160,9 +160,9 @@
 }
 
 @media (max-width: 460px) {
-  .product {
+  /* .product {
     top: 80px;
-  }
+  } */
 
   .product__detail {
     margin-bottom: 30%;

@@ -79,6 +79,10 @@
   justify-content: space-around;
 }
 
+.register__payment input {
+  cursor: pointer;
+}
+
 /* 
 *============================
 *       CHECKOUTVIEW
@@ -108,16 +112,12 @@
 .placeorder {
   width: 100%;
   justify-content: center;
-  /* min-height: 100vh; */
   flex-direction: column;
   margin-bottom: 5%;
 }
 
 .placeorder__header {
   flex: 2;
-}
-
-.placeorder__header--steps {
 }
 
 .placeorder__contents {
@@ -130,8 +130,8 @@
 
 .placeorder__info--shipping {
   margin-bottom: 15px;
-  background-color: var(--white-color);
   padding: 10px;
+  border-bottom: 1.5px solid #ccc;
 }
 
 .placeorder__info--shipping h1 {
@@ -141,27 +141,28 @@
 .placeorder__info--shipping span {
   font-weight: normal;
   font-style: italic;
-  opacity: 0.85;
+  opacity: 0.6;
 }
 
 .placeorder__payment {
-  background-color: var(--white-color);
   padding: 10px;
+  border-bottom: 1.5px solid #ccc;
+}
+
+.placeorder__payment h5 {
+  font-weight: normal;
 }
 
 .placeorder__cart {
   margin-top: 20px;
   flex-direction: column;
-  background-color: var(--white-color);
   padding: 10px;
 }
 
 .placeorder__cart--detail {
   gap: 20px;
   margin-bottom: 10px;
-}
-
-.placeorder__cart--img {
+  border-bottom: 1.5px solid #ccc;
 }
 
 .placeorder__cart--img img {
@@ -172,31 +173,53 @@
   width: 100%;
 }
 
+.placeorder__cart--info h4 {
+  text-transform: uppercase;
+  font-weight: normal;
+}
+
+.placeorder__cart--info h3 span {
+  font-weight: normal;
+  font-size: 16px;
+}
+
 .placeorder__pay {
   flex: 1;
+  margin-left: 20px;
 }
+
+.placeorder__pay > h1 {
+  margin-bottom: 20px;
+}
+
+.placeorder__pay h2 span,
+.placeorder__pay h3 span {
+  font-weight: normal;
+}
+
+.placeorder__pay-total h2 span {
+  font-size: 16px;
+}
+
+.placeorder__pay-total p {
+  opacity: 0.6;
+  font-style: italic;
+}
+
 /* 
 *============================
 *        MEDIA QUERY
 *============================
 */
 @media (max-width: 990px) {
-  .placeorder {
-    /* min-height: 120vh; */
-  }
-
   .placeorder__contents {
     flex-direction: column;
   }
 }
 
 @media (max-width: 624px) {
-  .register {
-    /* min-height: 138vh; */
-  }
-
   .checkout__steps h4 {
-    font-size: 11px;
+    font-size: 10px;
   }
 
   .register__form {
@@ -210,10 +233,6 @@
   .placeorder__cart--detail {
     flex-direction: column;
   }
-
-  .placeorder {
-    /* min-height: 130vh; */
-  }
 }
 
 @media (max-width: 424px) {
@@ -223,7 +242,4 @@
 }
 
 @media (max-width: 400px) {
-  .placeorder {
-    /* min-height: 145vh; */
-  }
 }
