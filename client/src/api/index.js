@@ -107,6 +107,7 @@ export const createOrder = async (order) => {
   }
 };
 
+// processa a compra  do usuário
 export const getOrder = async (id) => {
   try {
     const { token } = getUserInfo();

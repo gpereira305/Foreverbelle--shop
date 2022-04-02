@@ -9,6 +9,7 @@ import ProfileView from "./views/ProfileView";
 import ShippingView from "./views/ShippingView";
 import PaymentView from "./views/PaymentView";
 import PlaceOrderView from "./views/PlaceOrderView";
+import OrderView from "./views/OrderView.js";
 
 import { parseRequestUrl, showLoading, hideLoading } from "./utils";
 
@@ -16,6 +17,7 @@ import { parseRequestUrl, showLoading, hideLoading } from "./utils";
 const routes = {
   "/": HomeView,
   "/product/:id": ProductView,
+  "/order/:id": OrderView,
   "/cart/:id": CartView,
   "/cart": CartView,
   "/signin": SignInView,
@@ -54,8 +56,9 @@ const router = async () => {
   const navHeight = 40;
   let lastScrollY = 0;
   const delta = 10;
+  let didScroll = false;
 
-  function scrolled() {
+  const scrolled = () => {
     let sy = window.scrollY;
     if (Math.abs(lastScrollY - sy) > delta) {
       if (sy > lastScrollY && sy > navHeight) {
@@ -66,17 +69,45 @@ const router = async () => {
       lastScrollY = sy;
     }
   }
-  let didScroll = false;
-  window.addEventListener("scroll", function (e) {
-    didScroll = true;
-  });
-
+  window.onscroll = (e) =>  didScroll = true; 
   setInterval(function () {
     if (didScroll) {
       scrolled();
       didScroll = false;
     }
   }, 250);
+
+// NAVBAR MOBILE
+const mobileMenu = document.querySelector('#mobile-menu');
+const navMenu = document.querySelector('#nav__menu');
+
+mobileMenu.onclick = () => {
+  navMenu.classList.toggle('visible')  
+}
+  
+
+// GOT TO HTE TOP OF THE PAGE BUTTON
+ const scrollToTopBtn = document.querySelector(".scrollToTopBtn");
+ const  rootElement = document.documentElement; 
+
+const handleScroll = () => { 
+  var scrollTotal = rootElement.scrollHeight - rootElement.clientHeight;
+  if (rootElement.scrollTop / scrollTotal > 0.1) { 
+    scrollToTopBtn.classList.add("showBtn");
+  } else { 
+    scrollToTopBtn.classList.remove("showBtn");
+  }
+}
+
+const scrollToTop = () => { 
+  rootElement.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+}
+scrollToTopBtn.onclick = () => scrollToTop() 
+document.onscroll = () => handleScroll() 
+
 
   //  GET CURRENT YEAR
   const currentDate = new Date().getFullYear();

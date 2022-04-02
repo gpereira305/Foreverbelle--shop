@@ -57,7 +57,7 @@ const SigUpView = {
                          <input type="password" name="password" id="password" placeholder="**********"/>
                       </div>
                       <div class="register__form--password d-flex">
-                         <label for="repassword">Confirmar enha</label>
+                         <label for="repassword">Confirmar Senha</label>
                          <input type="password" name="repassword" id="repassword" placeholder="**********"/>
                       </div>
   

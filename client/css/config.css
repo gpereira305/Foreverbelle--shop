@@ -61,8 +61,7 @@ a {
 html {
   font-size: 62.5%;
   font-family: "Poppins", sans-serif;
-  font-weight: normal;
-  scroll-behavior: smooth;
+  font-weight: normal; 
 }
 
 body {
@@ -71,6 +70,43 @@ body {
   font-size: 1.6rem;
   position: relative;
 }
+
+.scrollToTopBtn{
+  position: fixed;
+  width: 45px;
+  height: 45px;
+  bottom: 22%; 
+  background-color: var(--black-color);
+  right: 5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: var(--transition);
+  -webkit-transition: var(--transition);
+  -moz-transition: var(--transition);
+  -ms-transition: var(--transition);
+  -o-transition: var(--transition); 
+  z-index: 100; 
+  border: none;   
+  line-height: 48px; 
+  opacity: 0; 
+  transform: translateY(100px); 
+}
+
+.scrollToTopBtn > span {
+  color: var(--white-color);
+}
+
+.scrollToTopBtn:hover{
+  background: rgb(0 0 0 / 85%);
+}
+
+.showBtn {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 
 /* 
 *===============================
@@ -85,10 +121,14 @@ body {
   border: 2.5px solid var(--black-color);
   text-transform: uppercase;
   line-height: 1;
-  transition: var(--transition);
   font-size: 13px;
   font-weight: 700;
   padding: 12px 20px;
+  transition: var(--transition);
+  -webkit-transition: var(--transition);
+  -moz-transition: var(--transition);
+  -ms-transition: var(--transition);
+  -o-transition: var(--transition);
 }
 
 .main-btn:hover {
@@ -109,6 +149,11 @@ body {
   background-color: var(--black-color);
   color: var(--white-color);
 }
+
+
+
+
+ 
 
 /* 
 *===============================
@@ -146,4 +191,36 @@ body {
 .upper {
   text-transform: uppercase;
   text-align: center;
+}
+
+.success {
+  color: var(--green-color);
+  font-weight: normal;
+}
+
+.error {
+  color: var(--red-color);
+  font-weight: normal;
+}
+
+.paymentIcon {
+  display: flex;
+  align-items: center;
+}
+
+.fa-brands {
+  font-size: 2rem;
+  margin-left: 8px;
+}
+
+.fa-pix{
+  color: #00B3A4;
+}
+
+.fa-paypal{
+  color: #24397C;
+}
+
+.fa-bitcoin{
+  color:  #F7A501 ;
 }

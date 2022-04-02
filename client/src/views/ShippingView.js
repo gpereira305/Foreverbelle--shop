@@ -62,7 +62,7 @@ const ShippingView = {
                 </div> 
 
                 <div class="register__form--mail d-flex">
-                    <label for="country">País</label>
+                    <label for="country">País ou estado</label>
                     <input type="text" name="country" id="country" value="${country}"/>
                 </div> 
 

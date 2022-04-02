@@ -45,25 +45,19 @@ const ProductView = {
 
                         <div class="product__detail--price d-flex">
                           <div class="d-flex">
-                                ${
-                                  product.price < 62
-                                    ? `
-                                <h3 class="old-price">R$ ${product.price}</h3>
-
-                                <h3>R$ ${(
-                                  product.price -
-                                  (product.price - (72 / 100) * product.price)
-                                ).toFixed(2)}<span> à vista</span>
+                                ${product.price < 62 ? `
+                                <h3 class="old-price">R$ ${product.price}</h3> 
+                                <h3>
+                                  R$ 
+                                   ${( product.price - (product.price - (72 / 100) * product.price)).toFixed(2)}
+                                  <span> à vista</span>
                                 </h3> 
-                                `
-                                    : `<span>R$ ${product.price}</span>`
+                                ` :
+                                `<span>R$ ${product.price}</span>`
                                 }
-                          </div>
-                          <h4>ou 6x sem juros</h4>
-
+                          </div>  
                           <h5>Cor: ${product.color}</h5>
-                        </div>
-
+                        </div> 
                     </div>  
                     
                     <div class="product__detail--button"> 
@@ -79,10 +73,8 @@ const ProductView = {
 
                     <div class="product__description">
                       <h3>Descrição:</h3>
-                      <small>${product.description}</small> 
-
-                      <h5>Tags:<span> ${product.tag}</span></h5>
-
+                      <small>${product.description}</small>  
+                      <h5>Tags:<span> ${product.tag}</span></h5>  
                       <br>
                       <br>
                       <div class="product__description-media">

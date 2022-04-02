@@ -8,11 +8,8 @@ const PaymentView = {
     // ação de coleta de dados de entrega do usuário
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
-      const paymentMethod = document.querySelector(
-        'input[name="payment-method"]:checked'
-      ).value;
-      setPaymentInfo({ paymentMethod });
-
+      const paymentMethod = document.querySelector('input[name="payment-method"]:checked').value;
+      setPaymentInfo({ paymentMethod }); 
       document.location.hash = "/placeorder";
     });
   },

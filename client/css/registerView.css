@@ -1,6 +1,5 @@
 .register {
-  width: 100%;
-  /* min-height: 112vh; */
+  width: 100%; 
   justify-content: center;
   flex-direction: column;
 }
@@ -85,7 +84,7 @@
 
 /* 
 *============================
-*       CHECKOUTVIEW
+*       CHECKOUT VIEW
 *============================
 */
 .checkout__steps {
@@ -100,13 +99,13 @@
 }
 
 .checkout__steps h4.active {
-  color: salmon;
+  color: var(--red-color);
   opacity: 1;
 }
 
 /* 
 *============================
-*        PLACEORDERVIEW
+*        PLACEORDER VIEW
 *============================
 */
 .placeorder {
@@ -240,6 +239,4 @@
     width: 100%;
   }
 }
-
-@media (max-width: 400px) {
-}
+  

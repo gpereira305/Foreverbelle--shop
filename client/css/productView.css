@@ -1,6 +1,5 @@
 .product {
-  width: 100%;
-  /* min-height: 115vh; */
+  width: 100%; 
   justify-content: center;
   flex-direction: column;
 }
@@ -112,12 +111,7 @@
 *        MEDIA QUERY
 *============================
 */
-@media (max-width: 1124px) {
-  /* .product {
-    position: relative;
-    top: 30px;
-  } */
-
+@media (max-width: 1124px) { 
   .product__detail--image img {
     width: 95%;
   }
@@ -149,21 +143,13 @@
   }
 }
 
-@media (max-width: 724px) {
-  /* .product {
-    top: 50px;
-  } */
-
+@media (max-width: 724px) { 
   .product__detail--image {
     width: 100%;
   }
 }
 
-@media (max-width: 460px) {
-  /* .product {
-    top: 80px;
-  } */
-
+@media (max-width: 460px) { 
   .product__detail {
     margin-bottom: 30%;
   }

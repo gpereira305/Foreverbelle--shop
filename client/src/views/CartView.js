@@ -25,7 +25,7 @@ const addToCart = (item, forceUpdate = false) => {
   }
 };
 
-// Remve o item do carrinho e do localStorage
+// Remove o item do carrinho e do localStorage
 const removeItemFromCart = (id) => {
   setCartItems(getCartItems().filter((i) => i.product !== id));
   if (id === parseRequestUrl().id) {
@@ -38,17 +38,12 @@ const removeItemFromCart = (id) => {
 const CartView = {
   switch_render: () => {
     // Ao ser selecionado no select a qde de itens no carrinho alterada
-    const qtySelects = document.getElementsByClassName(
-      "cart__img--select-selector"
-    );
+    const qtySelects = document.getElementsByClassName("cart__img--select-selector");
+
     Array.from(qtySelects).forEach((qtySelect) => {
       qtySelect.onchange = (e) => {
         const item = getCartItems().find((i) => i.product === qtySelect.id);
-        addToCart(
-          {
-            ...item,
-            qty: Number(e.target.value),
-          },
+        addToCart({ ...item,  qty: Number(e.target.value)},
           true
         );
       };
@@ -92,7 +87,7 @@ const CartView = {
           <section class="empty d-flex al-center">
             <div class="empty__text">
                   <h1>Seu carrinho está vazio</h1>
-                <a href="/#/">Vá às compras</a>
+                  <a href="/#/">Vá às compras</a>
             </div>
           </section>
       `;
@@ -115,72 +110,68 @@ const CartView = {
 
              <div class="cart__container d-flex">
                 <div class="cart__item d-flex"> 
-                ${cartItems
-                  .map(
-                    (item) => `
+                ${cartItems.map((item) => `
                   <div class="cart__img d-flex">
-                  <span class="material-icons delete-btn" 
-                    title="Remover item" id="${item.product}">
+                  <span class="material-icons delete-btn" title="Remover item" id="${item.product}">
                       cancel
-                  </span>
+                   </span>
                       <img src="${item.image}" alt="${item.name}">
 
                       <div class="cart__img-info">
                           <h3>
-                             <a href="/#/product/${
-                               item.product
-                             }" title="Ver datalhes desse produto">${item.name}
-                              </a> 
+                             <a href="/#/product/${item.product}" title="Ver datalhes desse produto">${item.name}</a> 
                           </h3>
                           <h4>Cor: <span>${item.color}</span></h4>
 
                           <div>
-                             <h4>Preço: <span>R$ ${
-                               item.price
-                             }</span><span class="italic"> à vista</span> </h4>
+                             <h4>
+                               Preço: 
+                               <span>R$ ${item.price}</span>
+                               <span class="italic"> à vista
+                               </span> 
+                             </h4>
                               
                              <div class="cart__img--select d-flex al-center">
-                                <label>Quantidade:</label>
-                                <select class="cart__img--select-selector" id="${
-                                  item.product
-                                }">
-                                  ${[...Array(item.countStock).keys()].map(
-                                    (x) =>
-                                      item.qty === x + 1
-                                        ? ` <option selected value="${x + 1}">${
-                                            x + 1
-                                          }</option>`
-                                        : ` <option value="${x + 1}">${
-                                            x + 1
-                                          }</option>`
-                                  )}
+                                <label>Selecione:</label>
+                                <select class="cart__img--select-selector" id="${ item.product}">
+                                  ${[...Array(item.countStock).keys()].map((x) =>
+                                      item.qty === x + 1 ? 
+                                      `<option selected value="${x + 1}">${x + 1}</option>`
+                                        : 
+                                      `<option value="${x + 1}">${x + 1}</option>`
+                                    )}
                                 </select>
                              </div>
                           </div>
                       </div>
                   </div> 
-                `
-                  )
-                  .join("\n")}
+                ` ).join("\n")}
                 </div>
                 
                 <div class="cart__info d-flex">
                    <div>
                        <h2>
-                         Total de unidades: 
-                         <span>(${cartItems.reduce(
-                           (a, c) => a + c.qty,
-                           0
-                         )})</span>
+                         Total: 
+                         <span>
+                          ${cartItems.reduce((a, c) => 
+                            a + c.qty, 0)} 
+                           ${cartItems.reduce((a, c) => 
+                            a + c.qty, 0) > 1 ? "unidades" : "unidade"} 
+                         </span>
                       </h2>
                         <h3>
                           Total a pagar: 
                           <span>R$ ${cartItems
                             .reduce((a, c) => a + c.price * c.qty, 0)
                             .toFixed(2)} à vista</span>
-                        </h3> 
-                        <p>Ou 6x sem juros</p>
-                        <button type="button" class="main-btn filled" id="checkout-btn" title="Ir para checkout">
+                        </h3>  
+                        <br>
+                        <button 
+                          type="button" 
+                          class="main-btn filled" 
+                          id="checkout-btn" 
+                          title="Ir para checkout"
+                        >
                           Ir para checkout
                         </button>
                    </div>

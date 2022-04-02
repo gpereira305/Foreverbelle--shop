@@ -46,6 +46,7 @@ const PlaceOrderView = {
       showLoading();
       const data = await createOrder(order);
       hideLoading();
+
       if (data.error) {
         showMessage(data.error);
       } else {
@@ -85,7 +86,7 @@ const PlaceOrderView = {
                         <h5>CEP: <span>${toUpper(
                           shipping.postalCode
                         )}</span></h5>
-                        <h5>País: <span>${toUpper(
+                        <h5>País ou estado: <span>${toUpper(
                           shipping.country
                         )}</span></h5>   
                     </div>
@@ -98,35 +99,29 @@ const PlaceOrderView = {
                     <div class="placeorder__cart d-flex">
                         <h1>Itens no seu carrinho</h1>
 
-                          ${orderItems
-                            .map(
-                              (item) => `
+                          ${orderItems.map((item) => `
                                 <div class="placeorder__cart--detail d-flex">
                                     <div class="placeorder__cart--img">
-                                      <img src="${item.image}" alt="${
-                                item.name
-                              }"/>
+                                      <img src="${item.image}" alt="${item.name}"/>
                                     </div> 
                                     <div class="placeorder__cart--info">
                                         <h4>${item.name}</h4>
                                         <h3>
-                                           Quantidade:
-                                          <span>${item.qty} ${
-                                item.qty > 1 ? "itens" : "item"
-                              }</span>  
+                                           Qde:
+                                          <span>${item.qty} ${item.qty > 1 ? "unidades" : "unidade"}</span>  
                                         </h3>
-                                        <h3>Cor: <span> ${
-                                          item.color
-                                        }</span></h3>
+                                        <h3>
+                                          Cor: 
+                                          <span> ${item.color}</span>
+                                        </h3>
         
-                                        <h3>Preço: <span> R$ ${item.price.toFixed(
-                                          2
-                                        )} à vista</span></h3>
+                                        <h3>
+                                           Preço Unidade: 
+                                           <span> R$ ${item.price.toFixed(2)} à vista</span>
+                                        </h3>
                                     </div>
                                 </div>  
-                          `
-                            )
-                            .join("\n")}
+                          `).join("\n")}
                     </div>
                   </div>
 
@@ -136,7 +131,7 @@ const PlaceOrderView = {
                       Total: 
                       <span>
                         ${orderItems.reduce((a, c) => a + c.qty, 0)} 
-                        ${orderItems.length > 1 ? "itens" : "item"}
+                        ${orderItems.reduce((a, c) => a + c.qty, 0) > 1 ? "itens" : "item"} 
                       </span> 
                     </h2> 
 
@@ -144,9 +139,7 @@ const PlaceOrderView = {
                         <h2>
                             Valor total: 
                             <span>R$ ${calcItemsPrice.toFixed(2)} à vista</span>
-                        </h2> 
-                        
-                        <p>Ou 6x sem juros</p>
+                        </h2>  
                         <br>
                         <button type="button" 
                           class="main-btn filled" 

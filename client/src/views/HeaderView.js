@@ -2,6 +2,7 @@ import { getUserInfo } from "../localStorage";
 import {toUpper} from '../config'
 
 const HeaderView = {
+  switch_render: () => {},
   render: () => {
     const { name } = getUserInfo();
     // limita a quntidade de caracteres do nome do usuário
@@ -15,17 +16,19 @@ const HeaderView = {
             </h1>
         </div>
 
-         <div class="nav__menu">
+         <div class="nav__menu" id="nav__menu">
             <ul class="d-flex sp-between al-center"> 
                <li class="d-flex al-center">
-                  ${
-                    name
-                      ? ` <a href="/#/profile" title="${toUpper(name)}">
-                           Olá, ${toUpper(reducedName)}
-                            <span class="material-icons">person</span>
-                          </a> 
-                     `
-                      : ` <a href="/#/signin">Log in</a> `
+                  ${name ? 
+                  `<a href="/#/profile" title="${toUpper(name)}">
+                      Olá, ${toUpper(reducedName)}
+                      <span class="material-icons">person</span>
+                   </a> 
+                   `: 
+                    ` <a href="/#/signin">
+                          Log in
+                          <span class="material-icons">person</span>
+                      </a> `
                   } 
                </li>  
                  <li class="d-flex al-center" title="Ver carrinho">
@@ -34,12 +37,17 @@ const HeaderView = {
                      <span class="material-icons">shopping_bag</span>
                    </a>
                 </li>
-             </ul>
-           </div> 
-        `;
-  },
+             </ul> 
+             </div>
+             <!--- mobile menu icon--->
+              <div class="mobile-menu" id="mobile-menu">
+                  <span class="material-icons">
+                    menu
+                 </span>
+               </div>
 
-  switch_render: () => {},
+        `;
+  }, 
 };
 
 export default HeaderView;
