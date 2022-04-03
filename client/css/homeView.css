@@ -22,7 +22,7 @@
   background-color: var(--white-color);
   left: 0;
   right: 0;
-  height: 8vh;
+  height: 7vh;
   top: 40px;
   transition: var(--transition);
 }
@@ -450,9 +450,9 @@
   .nav__menu {
     display: none;
     background-color: var(--white-color);
-    padding: 10px 20px;
+    padding: 17px 20px;
     position: absolute;
-    bottom: -63%;  
+    top: 95%;
     right: 0;
     left: 0; 
     max-width: 100%;
@@ -473,12 +473,11 @@
   }
   /* fim mobile menu */
 
-  
+ 
   .nav__banner-text h1 {
     font-size: 2rem;
   }
  
-
   .sales__grid {
     grid-template-columns: repeat(2, 1fr);
   }
