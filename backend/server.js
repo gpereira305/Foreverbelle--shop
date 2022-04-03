@@ -6,6 +6,7 @@ import bodyParser from "body-parser";
 import config from "./config.js";
 import userRouter from "./routers/userRouter";
 import orderRouter from "./routers/orderRouter";
+import path from 'path'
 
 mongoose
   .connect(config.MONGODB_URL, {
@@ -22,6 +23,7 @@ mongoose
 
 // routers
 const app = express();
+
 app.use(cors());
 app.use(bodyParser.json());
 app.use("/api/orders", orderRouter);
@@ -35,6 +37,10 @@ app.get("/api/products/:id", (req, res) => {
     res.status(404).send({ message: "Produto não encontrado" });
   }
 });
+app.use(express.static(path.join(__dirname, '/../client')))
+app.get('*', (req, res)=> {
+  res.sendFile(path.join(__dirname, '/../client/index.html'))
+})
 app.use((err, req, res, next) => {
   const status = err.name && err.name === "ValidationError" ? 400 : 500;
   res.status(status).send({ message: err.message });
